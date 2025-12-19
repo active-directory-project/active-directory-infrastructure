@@ -3,7 +3,7 @@
 </p>
 
 <h1>Active Directory Infrastructure in Azure (Virtual Machine) for Windows Users</h1>
-This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines. We are going to create 2 Virtual Machines, one that serves as the domain control and will be name: dc-1 and the second Virtual Machine which will be getting the DNS from the domain control and will name: client-1.<br />
+This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines. We are going to create 2 Virtual Machines, one that serves as the domain control and will be name: dc-1 and the second Virtual Machine which will be getting the DNS from the domain control and will be named: client-1.<br />
 
 <h2>Video Demonstration</h2>
 
@@ -29,9 +29,12 @@ This tutorial outlines the implementation of on-premises Active Directory within
 - Install Active Directory
 
 <h2>Installation Steps</h2>
+
+<h2>Register account in Azure</h2>
 You must register for an Azure account in order to construct virtual machines. Examine the various alternatives that best fit your company or the projects you are working on. After creating your account you can create a Resource Group. First you have to create Resource Group, to start you can click in the search bar or click <img width="47" height="16" alt="image" src="https://github.com/user-attachments/assets/03be3787-9799-43fe-8ada-89b456bab4c3" />
 
-- To create a Resource Group you can search resource group in the search bar or you can choose it from the dashboard
+<h2>Create a Resource Group</h2>
+To create a Resource Group you can search resource group in the search bar or you can choose it from the dashboard
 <p align left> 
 <img width="729" height="365" alt="Screenshot 2025-11-25 103136" src="https://github.com/user-attachments/assets/a9a8699a-1e32-483c-b8ff-e2da9179601e" />
 
@@ -50,8 +53,8 @@ For this lab we created a Resource Group, called Active-Directory-Lab.
 <img width="525" height="143" alt="image" src="https://github.com/user-attachments/assets/6e151bf6-09af-4e50-8c1b-9ef0ac38984b" />
 
 To create a Virtual Network, search in the search bar for Virtual Network, then click on Virtual Network. For this lab we are going to create a Virtual Network and Subnet, called Active-Directory-Vnet
-  <p align left>
-  <img width="517" height="145" alt="image" src="https://github.com/user-attachments/assets/52ec7ffb-7493-404d-a0bb-e66bf06fec23" />
+<p align left>
+<img width="517" height="145" alt="image" src="https://github.com/user-attachments/assets/52ec7ffb-7493-404d-a0bb-e66bf06fec23" />
   
 
 <p align center>  
@@ -63,26 +66,25 @@ To create a Virtual Network, search in the search bar for Virtual Network, then 
 
 This Virtual Machine dc-1 will serve as the Domain Control, to which our second Virtual Machine client-1 will get the local host. First of all we are going to create dc-1 which is the Domain control, to do that we are going to follow the next steps:
 
-- After created the Resource Group you can continue with the second step which is creating a Virtual Machine, to do that you can click again the search bar   and look for Virtual Machines or in the dashboard click on Virtual Machines.
-  <p align left>
-  <img width="586" height="203" alt="Screenshot 2025-11-25 123544" src="https://github.com/user-attachments/assets/429c2ec6-fb03-4ac5-826e-e3c874c3e540" />
+After created the Resource Group you can continue creating a Virtual Machine, to do that you can click again the search bar and look for Virtual Machines or in the dashboard click on Virtual Machines.
+<p align left>
+<img width="586" height="203" alt="Screenshot 2025-11-25 123544" src="https://github.com/user-attachments/assets/429c2ec6-fb03-4ac5-826e-e3c874c3e540" />
 
-  Choose the first option
-  <p align left> 
-  <img width="686" height="386" alt="Screenshot 2025-11-25 123917" src="https://github.com/user-attachments/assets/85acb37f-f7e0-42f5-b547-0f214d793d70" />
+Choose the first option
+<p align left> 
+<img width="686" height="386" alt="Screenshot 2025-11-25 123917" src="https://github.com/user-attachments/assets/85acb37f-f7e0-42f5-b547-0f214d793d70" />
 
 Put in the appropriate subscription, in the resource group (Active-Directory-Lab) click on the one you just created, Choose a name for your Virtual Machine (Windows Server 2022), for Region choose the same you use in the Resource Group (Canada East), for Image use Windows Server 2022. Picture is just for reference
 </p>
 <img width="350" height="430" alt="Screenshot 2025-11-25 131103" src="https://github.com/user-attachments/assets/54a4c1c8-e74f-47a7-85a6-e534a3028954" />
 
-For size try to use 2vcpus for a faster deployment, create a username and password for the Virtual Machine and always make sure to click in Licensing
-
+For size try to use 2vcpus for a faster deployment, create a username and password for the Virtual Machine and always make sure to click in Licensing. 
+<p align left>
 <img width="311" height="326" alt="Screenshot 2025-11-25 132238" src="https://github.com/user-attachments/assets/03308153-0eea-4e95-97cd-f374847e0be9" />
 
-Then click next for Disks
+Then click next for Disks. Create credentials for dc-1: username: labuser and password: Cyberlab123!
 <p align left>
 <img width="311" height="326" alt="Screenshot 2025-11-25 132238" src="https://github.com/user-attachments/assets/3e668943-9da0-42da-9ab7-167e8dc161d0" />
-
 
 Click next for Network, then click on Review + Create 
 <p align left>
@@ -92,27 +94,29 @@ After validation passed, click on Create at the bottom of the page to initialize
 <p align left>
 <img width="451" height="454" alt="Screenshot 2025-11-25 134704" src="https://github.com/user-attachments/assets/413c969e-8f81-45de-a779-148ac91090c5" />
 
-- And that's how you create the Domain Controller Virtual Machine with Windows Server 2022 named “DC-1”
-  <p align left>
-  <img width="503" height="178" alt="image" src="https://github.com/user-attachments/assets/0f5cb5a4-bb33-4155-986c-e796fa16bcf3" />
+And that's how you create the Domain Controller Virtual Machine with Windows Server 2022 named “DC-1”
+<p align left>
+<img width="503" height="178" alt="image" src="https://github.com/user-attachments/assets/0f5cb5a4-bb33-4155-986c-e796fa16bcf3" />
 
- After dc-1 is created, set Domain Controller’s NIC Private IP address to be static, to do this we have to click on dc-1, click on Networking, click on Network Settings
-  <p align left>
-  <img width="819" height="273" alt="Screenshot 2025-11-30 142640" src="https://github.com/user-attachments/assets/7a4b56b1-3d4e-410b-8752-ddb8f41231f1" />
+After dc-1 is created, set Domain Controller’s NIC Private IP address to be static, to do this we have to click on dc-1, click on Networking, click on Network Settings
+<p align left>
+<img width="819" height="273" alt="Screenshot 2025-11-30 142640" src="https://github.com/user-attachments/assets/7a4b56b1-3d4e-410b-8752-ddb8f41231f1" />
 
- Click on Network Interface/IP configuration
- <p align left>
- <img width="615" height="250" alt="Screenshot 2025-11-30 143933" src="https://github.com/user-attachments/assets/3e0b9940-1293-4c8c-a172-1c598fb80f65" />
+Click on Network Interface/IP configuration
+<p align left>
+<img width="615" height="250" alt="Screenshot 2025-11-30 143933" src="https://github.com/user-attachments/assets/3e0b9940-1293-4c8c-a172-1c598fb80f65" />
 
- In Private IP address settings change from Dynamic to Static, then click on Save at the bottom of the page
- <p align left>
- <img width="287" height="446" alt="Screenshot 2025-11-30 144310" src="https://github.com/user-attachments/assets/648347e3-7315-408e-80b9-a9d2e3bef867" />
+In Private IP address settings change from Dynamic to Static, then click on Save at the bottom of the page
+<p align left>
+<img width="287" height="446" alt="Screenshot 2025-11-30 144310" src="https://github.com/user-attachments/assets/648347e3-7315-408e-80b9-a9d2e3bef867" />
 
- Just for the purpose of this lab we are going to log into the dc-1 and disable the Windows Firewall (for testing connectivity), using the public IP address, RDC and log in using the credentials previously created (username: labuser and password: Cyberlab123!)
+ Just for the purpose of this lab we are going to log into the dc-1 and disable the Windows Firewall (for testing connectivity), using the public IP address (20.175.108.66), RDC and log in using the credentials previously created (username: labuser and password: Cyberlab123!), when we were creating our Virtual Machine in Azure.
  <p align left>
  <img width="303" height="183" alt="image" src="https://github.com/user-attachments/assets/bf18190b-88df-4024-ad3b-eac4ea1f3c72" />
  <img width="334" height="247" alt="image" src="https://github.com/user-attachments/assets/27110b56-1534-4a6b-af7d-19dad487c519" />
  <img width="293" height="299" alt="image" src="https://github.com/user-attachments/assets/c20ee217-1ce8-4531-8304-cbaffd5bb5f8" />
+ <img width="299" height="69" alt="Screenshot 2025-11-25 13223899" src="https://github.com/user-attachments/assets/acaad373-0c7b-425a-9543-7f71f21611a3" />
+
 
 Once we are log into dc-1, rigth click on start and select run, type wf.msc to go to Windows Firewall
 <p align left>
@@ -158,6 +162,8 @@ From the Azure Portal, restart Client-1, then log into client-1 using RDP and cr
 <img width="304" height="183" alt="image" src="https://github.com/user-attachments/assets/5680f6fb-280d-4271-92e7-63cd57d63a1f" />
 <img width="332" height="243" alt="image" src="https://github.com/user-attachments/assets/4557f543-0ac2-49b0-b2c2-67ded1b3107c" />
 <img width="286" height="305" alt="Screenshot 2025-11-30 153530" src="https://github.com/user-attachments/assets/514bcdb7-7d6d-4d7c-8f1f-c6cfb7ddaa18" />
+<img width="299" height="69" alt="Screenshot 2025-11-25 13223899" src="https://github.com/user-attachments/assets/d29a291e-f597-4caf-8773-0a9ee976ec80" />
+
 
 Attempt to ping DC-1’s private IP address 172.16.0.4
 <p align left>
@@ -196,7 +202,7 @@ AD DS, click on Next
 Confirmation, click on Restart the destination server automatically if required, yes and click on Install
 <img width="517" height="370" alt="Screenshot 2025-11-30 190538" src="https://github.com/user-attachments/assets/9375f3f2-6e12-4a15-946c-66a2ff8d1527" />
 
-Wait until installation has finished, when installed click on close, follow with the next lab which is Deploying Active Directory.
+Wait until installation is finished, when installed click on close, follow with the next lab which is Deploying Active Directory.
 <p align left>
 <img width="586" height="416" alt="image" src="https://github.com/user-attachments/assets/ba72f7b1-bd78-42b3-9f17-8ae50d4da8b5" />
 
